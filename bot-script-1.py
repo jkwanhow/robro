@@ -4,8 +4,10 @@ import os
 import time
 from dotenv import load_dotenv
 from choice import Choice
+from leo import Leo
 
 choice = Choice()
+leo = Leo("leo_phrases.txt")
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -15,6 +17,7 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
+    leo = Leo("leo_phrases.txt")
     choice = Choice()
     servers_string = client.guilds[0].name
     if len(client.guilds)!=1:
@@ -62,6 +65,26 @@ async def on_message(message):
         else:
             await message.channel.send("to use chooser:\n(to add):-chooser add *item*\n(to remove):-chooser remove *item*\
 \n(to show current list):-chooser current\n(to pick an item:-chooser pick\n(to reset list):-chooser reset")
+
+    if message.content.startswith('-leo'):
+        global leo
+        if message.content[:10] == "-leo says ":
+            verb = message.content[10:]
+            await message.channel.send(leo.use_verb(verb))
+        elif message.content[:9] == "-leo add ":
+            phrase = message.content[9:]
+            await message.channel.send(leo.add_phrase("leo_phrases.txt" ,phrase))
+            leo = Leo("leo_phrases.txt")
+        elif message.content == "-leo phrases":
+            await message.channel.send(leo.all_phrases())
+        elif message.content == '-leo random':
+            await message.channel.send(leo.random_line())
+        else:
+            await message.channel.send("I can be a bot, but I can also be like Leo\n\
+(use a verb to create a leo phrase):-leo says _____\n(see all leo phrases)-leo phrases\n\
+(get a random leo sentence)-leo random\n(add a new leo phrase needs to contain -verb- where the verbs should go, see -leo phrases for example):-leo add ________")
+
+
 
 
 client.run(TOKEN)

@@ -22,7 +22,7 @@ class Leo:
         return random.choice(verbs)
 
     def random_line(self):
-        return self.use_verb(self.random_verb)
+        return self.use_verb(self.random_verb())
 
 
     def add_phrase(self, phrases_source, phrase):
@@ -35,7 +35,7 @@ class Leo:
             return "Fuck you! Trying to use a new line? Think i wouldn't catch that?\n\
 But for real don't fuck with my text file of Leo phrases, they're precious"
         txt_file = open(phrases_source, 'a')
-        txt_file.write(phrase)
+        txt_file.write(f"\n{phrase}")
         txt_file.close()
         new_phrase = phrase.replace("-verb-", self.random_verb())
         return f"phrases added for example:\n'{new_phrase}'"
