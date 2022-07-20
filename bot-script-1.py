@@ -5,9 +5,11 @@ import time
 from dotenv import load_dotenv
 from choice import Choice
 from leo import Leo
+from nigel import Nigel
 
+leo_txt = 'robro/leo_phrases.txt'
 choice = Choice()
-leo = Leo("leo_phrases.txt")
+leo = Leo(leo_txt)
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -17,7 +19,7 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    leo = Leo("leo_phrases.txt")
+    leo = Leo(leo_txt)
     choice = Choice()
     servers_string = client.guilds[0].name
     if len(client.guilds)!=1:
@@ -73,8 +75,8 @@ async def on_message(message):
             await message.channel.send(leo.use_verb(verb))
         elif message.content[:9] == "-leo add ":
             phrase = message.content[9:]
-            await message.channel.send(leo.add_phrase("leo_phrases.txt" ,phrase))
-            leo = Leo("leo_phrases.txt")
+            await message.channel.send(leo.add_phrase(leo_txt ,phrase))
+            leo = Leo(leo_txt)
         elif message.content == "-leo phrases":
             await message.channel.send(leo.all_phrases())
         elif message.content == '-leo random':
