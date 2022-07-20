@@ -5,9 +5,11 @@ import time
 from dotenv import load_dotenv
 from choice import Choice
 from leo import Leo
+from fishing import FishingGame
 
 choice = Choice()
 leo = Leo("leo_phrases.txt")
+fish = FishingGame()
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -19,6 +21,7 @@ client = discord.Client()
 async def on_ready():
     leo = Leo("leo_phrases.txt")
     choice = Choice()
+    fish = FishingGame()
     servers_string = client.guilds[0].name
     if len(client.guilds)!=1:
         for guild in client.guilds[1:]:
@@ -29,9 +32,16 @@ async def on_ready():
     
 @client.event
 async def on_message(message):
+    global fish
     slurs = set(["fuck", "shit", "cunt", "bitch", "bastard"])
     if message.author == client.user:
         return
+
+    if message.content == "-clear":
+        ids = []
+        for msg in await message.channel.history(limit=1000).flatten():
+            await msg.delete()
+        
 
     if slurs.intersection(set(message.content.split())):
         await message.channel.send('No swearing here please...')
@@ -65,6 +75,14 @@ async def on_message(message):
         else:
             await message.channel.send("to use chooser:\n(to add):-chooser add *item*\n(to remove):-chooser remove *item*\
 \n(to show current list):-chooser current\n(to pick an item:-chooser pick\n(to reset list):-chooser reset")
+
+    if message.content == "-fish cast":
+        user = message.author
+        await message.channel.send(fish.catch(str(user)))
+    if message.content == "-fish inv":
+        user = message.author
+        await message.channel.send(fish.players_fish(str(user)))
+
 
     if message.content.startswith('-leo'):
         global leo

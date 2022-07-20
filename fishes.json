@@ -1,0 +1,31 @@
+[
+    {"name": "Salmon",
+    "min_size": 4,
+    "max_size": 10,
+    "rarity": 3,
+    "picture": "https://images.unsplash.com/photo-1594767169572-04fe914b61de?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80"},
+    
+    {"name": "Tuna",
+    "min_size": 200,
+    "max_size": 250,
+    "rarity": 7,
+    "picture": "https://www.tomscatch.com/fishing-techniques/detail-tuna-fishing-fishing-technique-6.png"},
+
+    {"name": "Anchovie",
+    "min_size": 0.004,
+    "max_size": 0.012,
+    "rarity": 1,
+    "picture": "https://s3.amazonaws.com/divcomplatform/seafoodsource.com/images/2867ec2c19bf9d9d4b4c9e499b2a2cb7.jpeg"},
+
+    {"name": "Tuna",
+    "min_size": 0.08,
+    "max_size": 0.3,
+    "rarity": 2,
+    "picture": "https://www.msc.org/images/default-source/au-library/content-page-banners---1920x1080-1024x576-640x36/sardine-cb1d567466b737c44e6a721a295c6bebf10.jpg?sfvrsn=526b1d4e_3"},
+
+    {"name": "Yeezys",
+    "min_size": 0.380,
+    "max_size": 0.390,
+    "rarity": 6,
+    "picture": "https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/070/278/012/original/105568_01.jpg.jpeg?action=crop&width=750"}
+]
