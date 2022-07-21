@@ -19,7 +19,7 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    leo = Leo(leo_txt)
+    leo = Leo("leo_phrases.txt")
     choice = Choice()
     fish = FishingGame()
     servers_string = client.guilds[0].name
@@ -91,8 +91,8 @@ async def on_message(message):
             await message.channel.send(leo.use_verb(verb))
         elif message.content[:9] == "-leo add ":
             phrase = message.content[9:]
-            await message.channel.send(leo.add_phrase(leo_txt ,phrase))
-            leo = Leo(leo_txt)
+            await message.channel.send(leo.add_phrase("leo_phrases.txt" ,phrase))
+            leo = Leo("leo_phrases.txt")
         elif message.content == "-leo phrases":
             await message.channel.send(leo.all_phrases())
         elif message.content == '-leo random':
